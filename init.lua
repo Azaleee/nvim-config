@@ -27,7 +27,14 @@ require("lazy").setup({
         		require("tokyodark").setup(opts) -- calling setup is optional
         		vim.cmd [[colorscheme tokyodark]]
     		end,
-	}
+	},
+	{
+		'windwp/nvim-autopairs',
+    		event = "InsertEnter",
+    		config = true
+    		-- use opts = {} for passing setup options
+    		-- this is equivalent to setup({}) function
+	},
 })
 vim.api.nvim_set_keymap('n', '<Leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
 
