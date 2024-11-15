@@ -48,7 +48,7 @@ require("lazy").setup({
         config = function()
             -- Configuration de nvim-cmp
             local cmp = require("cmp")
-
+		require("lsp.c")
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -68,24 +68,14 @@ require("lazy").setup({
                     { name = "buffer" },
                     { name = "path" },
                 }),
-            })
-
-            -- Configuration de nvim-lspconfig
-		local lspconfig = require("lspconfig")
-
--- Configuration pour le serveur clangd (LSP C/C++)
-		lspconfig.clangd.setup({
-    			cmd = { "clangd" },  -- Remplacez par le chemin complet si nécessaire
-    			filetypes = { "c", "cpp", "objc", "objcpp" },
-    			root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-    			capabilities = require("cmp_nvim_lsp").default_capabilities(),
-    			settings = {
-        			clangd = {
-            				fallbackFlags = { "-std=c++17" },  -- Exemple de drapeau pour le standard C++
-        			},
-    			},
-		}) 
+            }) 
         end,
+    },
+    {
+        "alexandregv/norminette-vim",
+        config = function()
+		require("config.norminette")
+        end
     },
 
 })
